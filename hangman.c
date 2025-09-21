@@ -4,8 +4,8 @@
 #include <time.h>
 #include <ctype.h>
 
-#define MAX_TRIES 7        // Maximum number of incorrect guesses
-#define WORD_COUNT 10       // Number of possible words
+#define MAX_TRIES 7        
+#define WORD_COUNT 10      
 
 // List of words to guess
 const char *words[WORD_COUNT] = {
@@ -15,12 +15,11 @@ const char *words[WORD_COUNT] = {
 
 // Function to choose a random word
 void pickWord(char *chosenWord) {
-    srand(time(NULL));                // Seed the random number generator
+    srand(time(NULL));                
     int index = rand() % WORD_COUNT;  // Randomly select a word
     strcpy(chosenWord, words[index]);
 }
 
-// Function to display the current state of the word
 void displayWord(const char *word, const int guessed[]) {
     printf("\nWord: ");
     for (size_t i = 0; i < strlen(word); i++) {
@@ -33,22 +32,20 @@ void displayWord(const char *word, const int guessed[]) {
     printf("\n");
 }
 
-// Function to check if the word is fully guessed
 int isWordGuessed(const char *word, const int guessed[]) {
     for (size_t i = 0; i < strlen(word); i++) {
         if (!guessed[i]) {
-            return 0;  // Word is not fully guessed yet
+            return 0;  
         }
     }
-    return 1;  // All letters are guessed
+    return 1;  
 }
 
-// Function to check if the guess is correct
 int checkGuess(const char *word, int guessed[], char guess) {
     int correct = 0;
     for (size_t i = 0; i < strlen(word); i++) {
         if (tolower(word[i]) == tolower(guess)) {
-            guessed[i] = 1;   // Mark the letter as guessed
+            guessed[i] = 1;   
             correct = 1;
         }
     }
@@ -57,13 +54,12 @@ int checkGuess(const char *word, int guessed[], char guess) {
 
 int main() {
     char chosenWord[50];
-    int guessed[50] = {0};      // Array to track guessed letters
+    int guessed[50] = {0};      
     char guess;
     int attempts = 0;
     char playAgain;
 
     do {
-        // Pick a random word and reset game variables
         pickWord(chosenWord);
         memset(guessed, 0, sizeof(guessed));  // Reset guessed letters
         attempts = 0;
@@ -110,3 +106,4 @@ int main() {
     
     return 0;
 }
+
